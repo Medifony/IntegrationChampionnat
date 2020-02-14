@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ChampFoot - Statistiques{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    {% if renc.statut == "En attente" %}
+               <h1>La rencontre n'a pas encore commencé !</h1>
+    {% else %}
+    <div class="row">
+        <table class="table" border=1>
+            <tbody>
+                <tr>
+                    <td width=10% rowspan=3><img src="{{ renc.equipesD.logo }}" class="logoSt" alt="Logo"></td>
+                    <th width=20% class="text-center" style="background-color: #FFF8DC">{{ renc.equipesD.nom}}</th>
+                    <th witdh=40% colspan=2 class="text-center">{{renc.StatsEqD.buts}} - {{renc.StatsEqE.buts}} </th>
+                    <th width=20% class="text-center" style="background-color: #FFF8DC">{{renc.equipesE.nom}}</th>
+                    <td witdh=10% rowspan=3><img src="{{ renc.equipesE.logo }}" class="logoSt" alt="Logo"></td>
+                </tr>
+                <tr>
+                    <td width=20% class="text-center">{{renc.equipesD.entraineurs.nom}}</td>
+                    <td width=40% colspan=2 class="text-center">{{renc.statut}} {% if app.user %}<a href="{{ path ('arbitre_rencontres_edit', {'id' : renc.id}) }}"><button type="button" class="btn btn-success">Arbitrer</button></a>{% endif %}</td>
+                    <td width=20% class="text-center">{{renc.equipesE.entraineurs.nom}}</td>
+                </tr>
+                <tr>
+                    <td width=20% class="text-center">{{renc.StatsEqD.dispositif}}</td>
+                    <td width=20% class="text-center">{{cal.findDay(cal.calDate)}} / {{cal.findHour(cal.calDate)}} </td>
+                    <td width=20% class="text-center">{{renc.stades.nom}}</td>
+                    <td width=20% class="text-center">{{renc.StatsEqE.dispositif}}</td>
+                </tr>
+                <tr>
+                    <td width=10%>{% if app.user %}<a href="{{ path ('arbitre_statsequipes_edit', {'id' : renc.StatsEqD.id}) }}"><button type="button" class="btn btn-success">Arbitrer</button></a>{% endif %}</td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.buts}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Buts</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.buts}}</td>
+                    <td witdh=10% >{% if app.user %}<a href="{{ path ('arbitre_statsequipes_edit', {'id' : renc.StatsEqE.id}) }}"><button type="button" class="btn btn-success">Arbitrer</button></a>{% endif %}</td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.possession}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Possession</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.possession}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.tirsC}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Tirs Cadrés</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.tirsC}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.tirs}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Tirs</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.tirs}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.corners}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Corners</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.corners}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.coupsFrancs}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Coups Francs</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.coupsFrancs}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.cartonsJaunes}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Cartons Jaunes</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.cartonsJaunes}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.cartonsRouges}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Cartons Rouges</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.cartonsRouges}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+                <tr>
+                    <td width=10%></td>
+                    <td width=20% class="text-center">{{renc.StatsEqD.fautes}}</td>
+                    <th witdh=40% colspan=2 class="text-center">Fautes</th>
+                    <td width=20% class="text-center">{{renc.StatsEqE.fautes}}</td>
+                    <td witdh=10% ></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <table class="table" border=1>
+            <tbody>
+                <tr>
+                    <td colspan=2 class="text-center" style="background-color: #FFF8DC"><img src="{{ renc.equipesD.logo }}" class="logoEq mr-1" alt="Logo"> {{renc.equipesD.nom}}</td>
+                    <th colspan=10 style="background-color: #FFF8DC">Statistiques des joueurs à domicile</th>
+                </tr>
+                <tr>
+                    <th>Num</th>
+                    <th>Nom</th>
+                    <th>Min</th>
+                    <th>Buts</th>
+                    <th>PassD</th>
+                    <th>Tirsc</th>
+                    <th>Tirs</th>
+                    <th>Pass</th>
+                    <th>Tacles</th>
+                    <th>Fautes</th>
+                    <th>CartJ</th>
+                    <th>CartR</th>
+                </tr>
+                {% for jRen in jRenc %}
+                    {% if jRen.joueurs.equipes == jRen.rencontres.equipesD %}
+                        <tr>
+                            <td class="text-center">{% if app.user %}<a href="{{ path ('arbitre_statsjoueurs_edit', {'id' : jRen.statsjoueurs.id}) }}"><button type="button" class="btn btn-success">Arbitrer</button></a>{% endif %} {{jRen.statsjoueurs.num}}</th>
+                            <td>{{jRen.joueurs.nom}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.min}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.buts}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.passD}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.tirsC}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.tirs}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.passes}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.tacles}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.fautes}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.cartonsJaunes}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.cartonsRouges}}</td>
+                            <td class="text-center">{{jRen.titRem}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <table class="table" border=1>
+            <tbody>
+                <tr>
+                    <td colspan=2 class="text-center" style="background-color: #FFF8DC"><img src="{{ renc.equipesE.logo }}" class="logoEq mr-1" alt="Logo"> {{renc.equipesE.nom}}</td>
+                    <th colspan=10 style="background-color: #FFF8DC">Statistiques des joueurs à l'extérieur</th>
+                </tr>
+                <tr>
+                    <th>Num</th>
+                    <th>Nom</th>
+                    <th>Min</th>
+                    <th>Buts</th>
+                    <th>PassD</th>
+                    <th>Tirsc</th>
+                    <th>Tirs</th>
+                    <th>Pass</th>
+                    <th>Tacles</th>
+                    <th>Fautes</th>
+                    <th>CartJ</th>
+                    <th>CartR</th>
+                </tr>
+                {% for jRen in jRenc %}
+                    {% if jRen.joueurs.equipes == jRen.rencontres.equipesE %}
+                        <tr>
+                            <td class="text-center">{% if app.user %}<a href="{{ path ('arbitre_statsjoueurs_edit', {'id' : jRen.statsjoueurs.id}) }}"><button type="button" class="btn btn-success">Arbitrer</button></a>{% endif %} {{jRen.statsjoueurs.num}}</th>
+                            <td>{{jRen.joueurs.nom}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.min}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.buts}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.passD}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.tirsC}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.tirs}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.passes}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.tacles}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.fautes}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.cartonsJaunes}}</td>
+                            <td class="text-center">{{jRen.statsjoueurs.cartonsRouges}}</td>
+                            <td class="text-center">{{jRen.titRem}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

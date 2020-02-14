@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Administration des utilisateurs.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des utilisateurs</h1>
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for util in pagination.data %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{util.id}}</span></td>
+                <td>{{util.firstName}}</span></td>
+                <td>{{util.lastName}}</span></td>
+                <td>{{util.email}}</td>
+                <td>{% for r in util.roles %}{{r}}/{% endfor %}</td>
+                <td class="text-center">
+                    <a href="#" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="#" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{pagination.display()}}
+</div>
+
+{% endblock %}

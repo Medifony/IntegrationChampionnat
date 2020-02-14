@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Champfoot - Equipes{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                    <tbody>
+                        {% for eqs in eq %}
+                            <tr>
+                                <td class="text-right"><a href="{{ path ('club', {'slug' : eqs.slug}) }}">
+                                        <img src="{{ eqs.logo }}" class="logoSt" alt="Logo">
+                                </a></td>
+                                <td><h2><a href="{{ path ('club', {'slug' : eqs.slug}) }}">
+                                        {{eqs.nom}}
+                                </a></h2></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

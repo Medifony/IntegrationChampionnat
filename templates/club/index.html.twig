@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Champfoot - Club{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <table class="table" border=1>
+                        <tbody>
+                            <tr>
+                                <th class="text-center" style="background-color: #FFF8DC">{{equ.nom}}</th>
+                            </tr>
+                            <tr>
+                                <td>{{equ.description}}</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="5">Rencontres de la saison</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set col = 0 %}
+                        {% for cal in cals %}
+                                <tr {% if  col  is divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>
+                                    <td>{{ cal.rencontres.statut }}</td>
+                                    <td>{{ cal.rencontres.equipesD.nom }}</td>
+                                    {% if cal.rencontres.statut != "En attente" %}
+                                    <td>{{ cal.rencontres.statsEqE.buts }} - {{ cal.rencontres.statsEqD.buts }}</td>
+                                    {% else %}
+                                    <td> - </td>
+                                    {% endif %}
+                                    <td>{{ cal.rencontres.equipesE.nom }}</td>
+                                    {% if cal.rencontres.statut != "En attente" %}
+                                    <td><a href="{{ path ('statspage', {'slug' : cal.rencontres.slug}) }}"><button type="button" class="btn btn-info">View</button></a></td>
+                                    {% else %}
+                                    <td> - </td>
+                                    {% endif %}
+                                </tr>
+
+                                {% set col = col + 1 %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <table class="table" border=1>
+                    <tbody>
+                        <tr>
+                            <td colspan=2 class="text-center "><img src="{{ equ.logo }}" class="logoSt" alt="Logo"></td>
+                        </tr>
+                        <tr>
+                            <th colspan=2 class="text-center" style="background-color: #FFF8DC">Généralités</th>
+                        </tr>
+                        <tr>
+                            <th>Fondation: </th>
+                            <td>{{equ.fondation}}</td>
+                        </tr>
+                        <tr>
+                            <th>Stade: </th>
+                            <td>{{equ.stades.nom}}</td>
+                        </tr>
+                        <tr>
+                            <th>Site Web: </th>
+                            <td>{{equ.site}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><img src="{{ equ.entraineurs.photo }}" class="logoSt" alt="Photo"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Entraineur: </th>
+                            <td>{{equ.entraineurs.nom}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan=2 class="text-center" style="background-color: #FFF8DC">Effectif</th>
+                        </tr>
+                        {% for data in jous %}
+                            <tr>
+                                <td><a href="{{ path ('joueur', {'slug' : data.slug}) }}">{{data.prenom}} {{data.nom}}</a></td>
+                                <td>{{data.poste}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

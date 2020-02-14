@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des joueurs.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion des joueurs</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_joueurs_create')}}" class="btn btn-primary my-5">Ajouter un joueur</a>
+        </div>
+    </div>
+    
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Equipe</th>
+                <th>Nationalité</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for jou in pagination.data %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{jou.id}}</span></td>
+                <td>{{jou.nom}}</td>
+                <td>{{jou.prenom}}</td>
+                <td><img src="{{ jou.equipes.logo }}" class="logoEq mr-2" alt="Logo">{{jou.equipes.nom}}</td>
+                <td>{{jou.nationalite}}</td>
+                <td class="text-center">
+                    <a href="{{ path('admin_joueurs_edit', {'id': jou.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_joueurs_delete', {'id': jou.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{pagination.display()}}
+</div>
+
+{% endblock %}

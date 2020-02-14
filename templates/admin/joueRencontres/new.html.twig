@@ -1,0 +1,19 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Importation d'un joueur dans une rencontre{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Importer un joueur dans une rencontre</h1>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-primary">Créer</button>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

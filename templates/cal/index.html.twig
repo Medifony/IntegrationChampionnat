@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ChampFoot - Calendrier{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="6">Rencontres de la journée {{page}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set dPrec = 'vide' %}
+
+                    {% for cal in cals %}
+                            {% if dPrec != cal.findDay(cal.calDate)  %}
+                                <tr>
+                                    <th colspan="6">Le {{cal.findDay(cal.calDate)}}</td>
+                                </tr>
+                                {% set dPrec = cal.findDay(cal.calDate) %}
+                            {% endif %}
+
+                            <tr style="background-color: #FFF8DC">
+                                <td>{{ cal.findHour(cal.calDate)}}</td>
+                                <td>{{ cal.rencontres.statut }}</td>
+                                <td>{{ cal.rencontres.equipesD.nom }}</td>
+                                {% if cal.rencontres.statut != "En attente" %}
+                                <td>{{ cal.rencontres.statsEqD.buts }} - {{ cal.rencontres.statsEqE.buts }}</td>
+                                {% else %}
+                                <td> - </td>
+                                {% endif %}
+                                <td>{{ cal.rencontres.equipesE.nom }}</td>
+                                {% if cal.rencontres.statut != "En attente" %}
+                                <td><a href="{{ path ('statspage', {'slug' : cal.rencontres.slug}) }}"><button type="button" class="btn btn-info">View</button>
+</a></td>
+                                {% else %}
+                                <td> - </td>
+                                {% endif %}
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                    <a class="page-link" href="{{ path('calpage', {'page': page - 1}) }}">&laquo;</a>
+                    </li>
+                    {% for i in 1..pages|length %}
+                        <li class="page-item {% if page == i %}active{% endif %}">
+                        <a class="page-link" href="{{ path('calpage', {'page': i}) }}">{{i}}</a>
+                        </li>
+                    {% endfor %}
+                    <li class="page-item {% if page == pages|length %}disabled{% endif %}">
+                    <a class="page-link" href="{{ path('calpage', {'page': page + 1}) }}">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+
+{% endblock %}

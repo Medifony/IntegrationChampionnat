@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration du classement.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion des classements</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_classements_create')}}" class="btn btn-primary my-5">Ajouter un classement</a>
+        </div>
+    </div>
+    
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Equipe</th>
+                <th class="text-center">Points</th>
+                <th class="text-center">Victoires</th>
+                <th class="text-center">Nuls</th>
+                <th class="text-center">Défaites</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for class in classs %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{class.id}}</span></td>
+                <td><img src="{{ class.equipes.logo }}" class="logoEq mr-2" alt="Logo">{{class.equipes.nom}}</span></td>
+                <td class="text-center"><span class="badge badge-info rounded">{{class.points}}</span></td>
+                <td class="text-center"><span class="badge badge-info rounded">{{class.victoires}}</span></td>
+                <td class="text-center"><span class="badge badge-info rounded">{{class.nuls}}</span></td>
+                <td class="text-center"><span class="badge badge-info rounded">{{class.defaites}}</span></td>
+                <td class="text-center">
+                    <a href="{{ path('admin_classements_edit', {'id': class.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_classements_delete', {'id': class.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

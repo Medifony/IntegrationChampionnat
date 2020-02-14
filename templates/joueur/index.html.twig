@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ChampFoot - Joueur{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <table class="table" border=1>
+                <tbody>
+                    <tr>
+                        <td colspan=2 rowspan=3><img src="{{ jou.photo }}" class="logoSt" alt="Photo"></td>
+                        <td><strong>Nom: </strong>{{jou.prenom}} {{jou.nom}}</td>
+                        <td><strong>Taille: </strong>{{jou.taille}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Age: </strong>{{jou.age}}</td>
+                        <td><strong>Poids:</strong>{{jou.poids}} kg</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Poste: </strong>{{jou.poste}}</td>
+                        <td><strong>Nationalite: </strong>{{jou.nationalite}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parcours: </strong>{{jou.equipes.nom}}</td>
+                        <td colspan=4><strong>{{jou.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+                <table class="table" border=1>
+                    <tbody>
+                        <tr>
+                            <td><img src="{{ jou.equipes.logo }}" class="logoSt" alt="Logo"></td>
+                            <th colspan=9>Statistiques sur la saison avec <a href="{{ path ('club', {'slug' : jou.equipes.slug}) }}">
+                            {{jou.equipes.nom}}</a></th>
+                        </tr>
+                        <tr>
+                            <th>Min</th>
+                            <th>Buts</th>
+                            <th>PassD</th>
+                            <th>Tirsc</th>
+                            <th>Tirs</th>
+                            <th>Pass</th>
+                            <th>Tacles</th>
+                            <th>Fautes</th>
+                            <th>CartJ</th>
+                            <th>CartR</th>
+                        </tr>
+                        <tr>
+                            {% for data in stJous %}
+                                <th>{{data.sMins}}</th>
+                                <th>{{data.sButs}}</th>
+                                <th>{{data.sPassD}}</th>
+                                <th>{{data.sTirsC}}</th>
+                                <th>{{data.sTirs}}</th>
+                                <th>{{data.sPasses}}</th>
+                                <th>{{data.sTacles}}</th>
+                                <th>{{data.sFautes}}</th>
+                                <th>{{data.sCartJ}}</th>
+                                <th>{{data.sCartR}}</th>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

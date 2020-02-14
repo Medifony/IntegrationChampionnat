@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    ChampFoot - Acceuil
+{% endblock %}
+
+{% block body %}
+
+      <div class="container">  
+          <div class="row">
+              <div class="col-md-2">
+                  <table class="table col-lg-1" >
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Equipes</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for equipe in equipes %}
+
+                        <tr>
+                            <td><img src="{{ equipe.logo }}" class="logoEq" alt="Logo"></td>
+                            <td><a href="{{ path ('club', {'slug' : equipe.slug}) }}">{{ equipe.nom }}</a></td>
+                        </tr>    
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+              </div>
+              <div class="col-md-7">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <table class="table">
+                <thead>
+                    {% set journeeActu = 1 %}
+                    <tr>
+                        <th colspan="6">Rencontres de la journée {{ journeeActu }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set dPrec = 'vide' %}
+
+                    {% for cal in cals %}
+                        {% if cal.journee == journeeActu %}
+                            {% if dPrec != cal.findDay(cal.calDate)  %}
+                                <tr>
+                                    <th colspan="6">Le {{cal.findDay(cal.calDate)}}</td>
+                                </tr>
+                                {% set dPrec = cal.findDay(cal.calDate) %}
+                            {% endif %}
+
+                            <tr style="background-color: #FFF8DC">
+                                <td>{{ cal.findHour(cal.calDate)}}</td>
+                                <td>{{ cal.rencontres.statut }}</td>
+                                <td>{{ cal.rencontres.equipesD.nom }}</td>
+                                {% if cal.rencontres.statut != "En attente" %}
+                                <td>{{ cal.rencontres.statsEqD.buts }} - {{ cal.rencontres.statsEqE.buts }}</td>
+                                {% else %}
+                                <td> - </td>
+                                {% endif %}
+                                <td>{{ cal.rencontres.equipesE.nom }}</td>
+                                {% if cal.rencontres.statut != "En attente" %}
+                                <td><a href="{{ path ('statspage', {'slug' : cal.rencontres.slug}) }}"><button type="button" class="btn btn-info">View</button>
+</a></td>
+                                {% else %}
+                                <td> - </td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="row">
+                      <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">Top 5 Equipes</th>
+                                        <th>Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set s = 1 %}
+
+                                    {% for class in classs %}
+
+                                        <tr>
+                                            <td><span class="badge badge-primary rounded">{{ s }}</span></td>
+                                            <td><img src="{{ class.equipes.logo }}" class="logoEq" alt="Logo"></td>
+                                            <td><a href="{{ path ('club', {'slug' : class.equipes.slug}) }}">{{ class.equipes.nom }}</a></td>
+                                            <td>{{ class.points }}</td>
+                                        </tr>
+
+                                        {% set s = s + 1 %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">Top 5 Buteurs</th>
+                                        <th>Buts</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set s = 1 %}
+
+                                    {% for data in stJousB %}
+
+                                        <tr>
+                                            <td><span class="badge badge-primary rounded">{{ s }}</span></td>
+                                            <td><img src="{{ data.StJouB.joueurs.equipes.logo }}" class="logoEq" alt="Logo"></td>
+                                            <td><a href="{{ path ('joueur', {'slug' : data.StJouB.joueurs.slug}) }}">{{ data.StJouB.joueurs.nom }}</a></td>
+                                            <td>{{ data.sButs }}</td>
+                                        </tr>
+
+                                        {% set s = s + 1 %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">Top 5 Passeurs</td>
+                                        <th>Passes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set s = 1 %}
+
+                                    {% for data in stJousP %}
+
+                                        <tr>
+                                            <td><span class="badge badge-primary rounded">{{ s }}</span></td>
+                                            <td><img src="{{ data.StJouP.joueurs.equipes.logo }}" class="logoEq" alt="Logo"></td>
+                                            <td><a href="{{ path ('joueur', {'slug' : data.StJouP.joueurs.slug}) }}">{{ data.StJouP.joueurs.nom }}</a></td>
+                                            <td>{{ data.sPasses }}</td>
+                                        </tr>
+
+                                        {% set s = s + 1 %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{path('admin_description_index')}}">Infos</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_stades_index')}}"><i class="fas fa-folder"></i> Stades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_entraineurs_index')}}"><i class="fas fa-folder"></i> Entraineurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_equipes_index')}}"><i class="fas fa-folder"></i> Equipes</a>
+                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_rencontres_index')}}"><i class="fas fa-futbol"></i> Rencontres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_calendriers_index')}}"><i class="far fa-calendar-check"></i> Calendriers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_stequipes_index')}}"><i class="fas fa-chart-line"></i> StEquipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_joueurs_index')}}"><i class="far fa-folder"></i> Joueurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_statsjoueurs_index')}}"><i class="fas fa-chart-line"></i> StJoueurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_jouerencontres_index')}}"><i class="fas fa-tshirt"></i> Jeux</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_classements_index')}}"><i class="fas fa-trophy"></i> Classements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_utilisateurs_index')}}"><i class="fas fa-users"></i> Users</a>
+                    </li>
+                </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="{{path('admin_account_logout')}}">Déconnexion</a>
+                        </li>
+                    </ul>
+            </div>
+        </nav>
+
+        {% for label, messages in app.flashes %}
+            <div class="container">
+                <div class="alert alert-{{label}}">
+                    {% for message in messages %}
+                        <p>{{message | raw}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}

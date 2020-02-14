@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des statistiques d'équipes.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion statistiques d'équipes</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_statsequipes_create')}}" class="btn btn-primary my-5">Ajouter une statistique</a>
+        </div>
+    </div>
+
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>IdStats</th>
+                <th>IdMatch</th>
+                <th>Slug</th>
+                <th>Equipe</th>
+                <th>Buts</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for stEq in pagination.data %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{stEq.id}}</span></td>
+                <td><span class="badge badge-primary rounded">{{stEq.rencontres.id}}</span></td>
+                <td>{{stEq.rencontres.slug}}</td>
+                <td>{{stEq.equipes.nom}}</td>
+                <td><span class="badge badge-info rounded">{{stEq.buts}}</span></td>
+                <td class="text-center">
+                    <a href="{{ path('admin_statsequipes_edit', {'id': stEq.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_statsequipes_delete', {'id': stEq.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{pagination.display()}}
+</div>
+
+{% endblock %}

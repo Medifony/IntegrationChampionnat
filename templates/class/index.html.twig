@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Champfoot - Classement{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <table class="table" border=1>
+                    <tbody>
+                        <tr>
+                            <th>Place</th>
+                            <th>Equipe</th>
+                            <th>Joué</th>
+                            <th>Vic.</th>
+                            <th>Nuls</th>
+                            <th>Déf.</th>
+                            <th>Buts</th>
+                            <th>DifButs</th>
+                            <th>Points</th>
+                        </tr>
+            
+                        {% set s = 1 %}
+                            {% for classs in class %}
+                                <tr>
+                                    <td class="text-center"><span class="badge badge-primary rounded">{{s}}</span></td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}> {{classs.equipes.nom}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.joues}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.victoires}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.nuls}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.defaites}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.totbuts}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.dif}}</td>
+                                    <td class="text-center" {% if  s  is not divisible by(2) %}style="background-color: #FFF8DC"{% endif %}>{{classs.points}}</td>
+                                </tr>
+                                {% set s = s + 1 %}
+                            {% endfor %}
+                    </tbody>
+                </table>
+    </div>
+</div>
+
+{% endblock %}

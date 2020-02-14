@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des stades.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion des stades</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_stades_create')}}" class="btn btn-primary my-5">Ajouter un stade</a>
+        </div>
+    </div>
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Ville</th>
+                <th>Capacite</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for stade in stades %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{stade.id}}</span></td>
+                <td>{{stade.nom}}</td>
+                <td>{{stade.ville}}</td>
+                <td><span class="badge badge-info rounded">{{stade.capacite}}</span></td>
+                <td class="text-center">
+                    <a href="{{ path('admin_stades_edit', {'id': stade.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_stades_delete', {'id': stade.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

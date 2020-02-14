@@ -1,0 +1,53 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des jeux.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion des jeux</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_jouerencontres_create')}}" class="btn btn-primary my-5">Ajouter un jeu</a>
+        </div>
+    </div>
+
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id Match</th>
+                <th>Id Stats</th>
+                <th>Statut</th>
+                <th>Slug Match</th>
+                <th>Joueur</th>
+                <th>Equipe</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for joueRenc in pagination.data %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{joueRenc.id}}</span></td>
+                <td><span class="badge badge-primary rounded">{{joueRenc.rencontres.id}}</span></td>
+                <td><span class="badge badge-primary rounded">{{joueRenc.statsjoueurs.id}}</span></td>
+                <td>{{joueRenc.titRem}}</td>
+                <td>{{joueRenc.rencontres.slug}}</td>
+                <td>{{joueRenc.joueurs.prenom}} {{joueRenc.joueurs.nom}}</td>
+                <td><img src="{{ joueRenc.joueurs.equipes.logo }}" class="logoEq mr-2" alt="Logo">{{joueRenc.joueurs.equipes.nom}}</td>
+                <td class="text-center">
+                    <a href="{{ path('admin_jouerencontres_edit', {'id': joueRenc.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_jouerencontres_delete', {'id': joueRenc.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{pagination.display()}}
+</div>
+
+{% endblock %}

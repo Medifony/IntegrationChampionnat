@@ -1,0 +1,43 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des entraineurs.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion des entraineurs</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_entraineurs_create')}}" class="btn btn-primary my-5">Ajouter un entraineur</a>
+        </div>
+    </div>
+
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Photo</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for entr in entrs %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{entr.id}}</span></td>
+                <td>{{entr.nom}}</td>
+                <td><img src="{{ entr.photo }}" class="logoEq" alt="Photo"></td>
+                <td class="text-center">
+                    <a href="{{ path('admin_entraineurs_edit', {'id': entr.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_entraineurs_delete', {'id': entr.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

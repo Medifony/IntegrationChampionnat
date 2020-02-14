@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration du Championnat.{% endblock %}
+
+{% block stylesheets %}
+
+   <style>
+    h4 { color: green; }
+  </style>
+
+  {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Description du Championnat</h1>
+        </div>
+        <div class="col">
+        {% if descr is empty %}
+                <a href="{{ path('admin_description_create')}}" class="btn btn-primary my-5">Créer une description</a>
+        {% else %}
+                {% for desc in descr %}
+                <a href="{{ path('admin_description_edit', {'id': desc.id})}}" class="btn btn-primary my-5">Modifier la description</a>
+                {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    {% for desc in descr %}
+        <div class="row">
+                <h2 class="col-4">Nom:</h2>
+                <h4 class="col-8">{{desc.nom}}</h4>
+        </div>
+        <div class="row">
+                <h2 class="col-4">NavBar:</h2>
+                <h4 class="col-8">{{desc.nav}}</h4>
+        </div>
+        <div class="row">
+                <h2 class="col-4">Journée:</h2>
+                <h4 class="col-8">{{desc.journee}}</h4>
+        </div>
+        <div class="row">
+                <h2 class="col-4">Saison:</h2>
+                <h4 class="col-8">{{desc.saison}}</h4>
+        </div>
+        <div class="row">
+                <h2 class="col-4">Logo:</h2>
+                <div class="img"><img src={{desc.logo}} class="logoBan bann rounded mx-auto d-block" alt="logo"></div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

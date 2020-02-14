@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des calendriers.{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="my-5">Gestion des calendriers</h1>
+        </div>
+        <div class="col">
+            <a href="{{ path('admin_calendriers_create')}}" class="btn btn-primary my-5">Ajouter un calendrier</a>
+        </div>
+    </div>
+
+
+    <table class="table table-over">
+        <thead>
+            <tr>
+                <th>Id Cal</th>
+                <th>Id Match</th>
+                <th>Date</th>
+                <th>Slug Match</th>
+                <th>Journée</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for cal in pagination.data %}
+            <tr>
+                <td><span class="badge badge-primary rounded">{{cal.id}}</span></td>
+                <td><span class="badge badge-primary rounded">{{cal.rencontres.id}}</span></td>
+                <td>{{cal.findDay(cal.calDate)}} {{cal.findHour(cal.calDate)}}</td>
+                <td>{{cal.rencontres.slug}}</td>
+                <td>{{cal.journee}}</td>
+                <td class="text-center">
+                    <a href="{{ path('admin_calendriers_edit', {'id': cal.id})}}" class="badge badge-pill badge-primary">Edit</a>
+                    <a href="{{ path('admin_calendriers_delete', {'id': cal.id})}}" class="badge badge-pill badge-danger">Suppr</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{pagination.display()}}
+</div>
+
+{% endblock %}
